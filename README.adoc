@@ -3,17 +3,24 @@ Follow instructions for ArchLinux (also tested with Fedora)
 
 https://dev.to/xs/kubernetes-minikube-with-qemu-kvm-on-arch-312a
 
-## Minikube installation in Mac/Windows
-
-https://minikube.sigs.k8s.io/docs/start/
-
-## Start Minikube with kvm2 driver
+### Start Minikube with kvm2 driver
 
 [source,bash]
 ----
 minikube delete
 minikube config set driver kvm2
 touch /tmp/config && export KUBECONFIG=/tmp/config
+minikube start
+----
+
+## Minikube installation in Mac/Windows
+
+https://minikube.sigs.k8s.io/docs/start/
+
+### Start Minikube
+
+[source,bash]
+----
 minikube start
 ----
 
