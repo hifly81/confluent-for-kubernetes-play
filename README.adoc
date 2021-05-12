@@ -21,34 +21,39 @@ kubectl create namespace confluent
 kubectl config set-context --current --namespace confluent
 ----
 
+## Add confluent repo to helm
+
 [source,bash]
 ----
-## Add confluent repo to helm
 helm repo add confluentinc https://packages.confluent.io/helm
 helm repo update
 ----
 
+## Install confluent-for-kubernetes operator
+
 [source,bash]
 ----
-## Install confluent-for-kubernetes operator
 helm upgrade --install confluent-operator confluentinc/confluent-for-kubernetes
 ----
 
-[source,bash]
-----
 ## Install Confluent components: 3 zk, 3 brokers, 1 connect, 1 ksqldb, 1 schema registry, 1 control center
-kubectl apply -f k8s/confluent-platform.yaml
-----
 
 [source,bash]
 ----
+kubectl apply -f k8s/confluent-platform.yaml
+----
+
 ## Verify events and pods
+
+[source,bash]
+----
 kubectl get events --sort-by='.lastTimestamp'
 kubectl get pods
 ----
 
+## Expose Control center on port 9021
+
 [source,bash]
 ----
-## Expose Control center on port 9021
 kubectl port-forward controlcenter-0 9021:9021
 ----
