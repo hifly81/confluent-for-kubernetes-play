@@ -1,0 +1,54 @@
+## Install Minikube with KVM/QEMU
+Follow instructions for ArchLinux (also tested with Fedora)
+
+https://dev.to/xs/kubernetes-minikube-with-qemu-kvm-on-arch-312a
+
+## Start Minikube with kvm2 driver
+
+[source,bash]
+----
+minikube delete
+minikube config set driver kvm2
+touch /tmp/config && export KUBECONFIG=/tmp/config
+minikube start
+----
+
+## Create confluent k8s namespace
+
+[source,bash]
+----
+kubectl create namespace confluent
+kubectl config set-context --current --namespace confluent
+----
+
+[source,bash]
+----
+## Add confluent repo to helm
+helm repo add confluentinc https://packages.confluent.io/helm
+helm repo update
+----
+
+[source,bash]
+----
+## Install confluent-for-kubernetes operator
+helm upgrade --install confluent-operator confluentinc/confluent-for-kubernetes
+----
+
+[source,bash]
+----
+## Install Confluent components: 3 zk, 3 brokers, 1 connect, 1 ksqldb, 1 schema registry, 1 control center
+kubectl apply -f k8s/confluent-platform.yaml
+----
+
+[source,bash]
+----
+## Verify events and pods
+kubectl get events --sort-by='.lastTimestamp'
+kubectl get pods
+----
+
+[source,bash]
+----
+## Expose Control center on port 9021
+kubectl port-forward controlcenter-0 9021:9021
+----
