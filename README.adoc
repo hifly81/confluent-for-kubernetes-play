@@ -47,8 +47,8 @@ kubectl apply -f k8s/confluent-platform.yaml
 
 [source,bash]
 ----
-kubectl get events --sort-by='.lastTimestamp'
-kubectl get pods
+watch -n 5 "kubectl get events --sort-by='.lastTimestamp'"
+watch -n 5 "kubectl get pods"
 ----
 
 ## Expose Control center on port 9021
@@ -56,4 +56,18 @@ kubectl get pods
 [source,bash]
 ----
 kubectl port-forward controlcenter-0 9021:9021
+----
+
+## Create a Topic named test-0
+
+[source,bash]
+----
+kubectl -f apply k8s/topic.yml
+----
+
+## Produce messages to topic test-0
+
+[source,bash]
+----
+kubectl -f apply k8s/producer.yml
 ----
