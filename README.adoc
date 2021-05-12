@@ -1,7 +1,11 @@
-## Install Minikube with KVM/QEMU
+## Minikube installation in Linux with KVM/QEMU
 Follow instructions for ArchLinux (also tested with Fedora)
 
 https://dev.to/xs/kubernetes-minikube-with-qemu-kvm-on-arch-312a
+
+## Minikube installation in Mac/Windows
+
+https://minikube.sigs.k8s.io/docs/start/
 
 ## Start Minikube with kvm2 driver
 
