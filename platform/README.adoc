@@ -10,7 +10,7 @@ https://dev.to/xs/kubernetes-minikube-with-qemu-kvm-on-arch-312a
 minikube delete
 minikube config set driver kvm2
 touch /tmp/config && export KUBECONFIG=/tmp/config
-minikube start
+minikube start --memory 16384 --cpus 4
 ----
 
 ## Minikube installation in Mac/Windows
@@ -40,14 +40,23 @@ helm repo add confluentinc https://packages.confluent.io/helm
 helm repo update
 ----
 
-## Install confluent-for-kubernetes operator
+## Option 1: Install confluent-for-kubernetes operator from Confluent’s Helm repo
 
 [source,bash]
 ----
 helm upgrade --install confluent-operator confluentinc/confluent-for-kubernetes
 ----
 
-## Install Confluent components: 3 zk, 3 brokers, 1 connect, 1 ksqldb, 1 schema registry, 1 control center
+## Option 2: Install confluent-for-kubernetes operator using the download bundle with license key
+
+[source,bash]
+----
+wget https://confluent-for-kubernetes.s3-us-west-1.amazonaws.com/confluent-for-kubernetes-2.2.0.tar.gz
+tar xvf confluent-for-kubernetes-2.2.0.tar.gz
+helm upgrade --install confluent-operator ./confluent-for-kubernetes-2.2.0-20211101/helm/confluent-for-kubernetes --set licenseKey=<CFK license key>
+----
+
+## Install Confluent components: 3 zk, 3 brokers, 1 connect, 1 ksqldb, 2 schema registry, 1 control center
 
 [source,bash]
 ----

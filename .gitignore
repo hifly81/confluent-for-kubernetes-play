@@ -1,0 +1,11 @@
+build/
+target/
+
+.project
+.settings/
+
+*.zip*
+*.tar.gz*
+
+.idea
+*.iml
