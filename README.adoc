@@ -15,4 +15,4 @@ Deploy of Confluent Platform on K8s with a producer application.
 
 ### platform-lb
 
-Deploy of Confluentr Platform on K8s with external access through Kubernetes Load Balancer.
+Deploy of Confluent Platform on K8s with external access through Kubernetes Load Balancer.

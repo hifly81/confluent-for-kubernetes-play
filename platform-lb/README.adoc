@@ -42,7 +42,13 @@ helm upgrade --install confluent-operator ./confluent-for-kubernetes-2.2.0-20211
 
 ## Expose kafka and other components to external access using Kubernetes Load Balancer
 
-Edit file _k8s/confluent-platform-reducted.yaml_ and add the value of your Kubernetes cluster DOMAIN (default is _cluster.local_)
+Edit file _k8s/confluent-platform-reducted.yaml_ and add the value of your Kubernetes cluster DOMAIN (default is _cluster.local_) in section:
+
+[source,yaml]
+----
+loadBalancer:
+  domain: cluster.local
+----
 
 ## Install Confluent components: 3 zk, 3 brokers, 1 control center
 
@@ -95,7 +101,7 @@ Add DNS records for the brokers and control center the URLs (e.g. /etc/hosts):
 
 ## Connect to Contol Center
 
-Open a browser poiting to http://controlcenter.$DOMAIN (e.g.http://controlcenter.cluster.local)
+Open a browser pointing to http://controlcenter.$DOMAIN (e.g.http://controlcenter.cluster.local)
 
 
 ## Create a Topic named test-1
